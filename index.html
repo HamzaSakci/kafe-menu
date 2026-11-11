@@ -1,0 +1,1222 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Aura Coffee & Lounge | Dijital Menü</title>
+  <meta name="description" content="Aura Coffee & Lounge Dijital Kafe Menüsü - Taze Meyve Suları, Sıcak ve Soğuk İçecekler.">
+  <meta name="theme-color" content="#1a1412">
+  
+  <!-- Google Fonts: Plus Jakarta Sans & Playfair Display -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome for crisp icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <style>
+    :root {
+      --bg-primary: #12100e;
+      --bg-secondary: #1a1614;
+      --bg-card: #231e1a;
+      --bg-glass: rgba(35, 30, 26, 0.85);
+      --accent: #d4a373;
+      --accent-light: #faedcd;
+      --accent-glow: rgba(212, 163, 115, 0.25);
+      --text-main: #fefae0;
+      --text-muted: #a99985;
+      --border-color: rgba(212, 163, 115, 0.15);
+      --tag-bg: rgba(212, 163, 115, 0.12);
+      --tag-border: rgba(212, 163, 115, 0.3);
+      --radius-sm: 10px;
+      --radius-md: 16px;
+      --radius-lg: 24px;
+      --shadow-soft: 0 10px 30px -10px rgba(0,0,0,0.5);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg-primary);
+      color: var(--text-main);
+      line-height: 1.5;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-image: 
+        radial-gradient(circle at 15% 10%, rgba(212, 163, 115, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 85% 60%, rgba(186, 122, 66, 0.06) 0%, transparent 40%);
+      background-attachment: fixed;
+    }
+
+    /* Mobile Container Frame */
+    .app-container {
+      width: 100%;
+      max-width: 480px;
+      min-height: 100vh;
+      padding-bottom: 90px;
+      position: relative;
+    }
+
+    /* Header Banner */
+    .hero-header {
+      position: relative;
+      padding: 36px 20px 24px;
+      text-align: center;
+      background: linear-gradient(180deg, rgba(26, 22, 20, 0.95) 0%, rgba(18, 16, 14, 0.7) 100%);
+      border-bottom: 1px solid var(--border-color);
+      backdrop-filter: blur(10px);
+    }
+
+    .cafe-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 14px;
+      background: var(--tag-bg);
+      border: 1px solid var(--tag-border);
+      border-radius: 50px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+
+    .cafe-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--accent-light);
+      letter-spacing: 0.5px;
+      margin-bottom: 6px;
+    }
+
+    .cafe-subtitle {
+      font-size: 13px;
+      color: var(--text-muted);
+      font-weight: 400;
+    }
+
+    /* Quick Info Strip (WiFi, Saatler, Masa) */
+    .quick-info-bar {
+      display: flex;
+      justify-content: space-around;
+      margin: 16px 16px 8px;
+      padding: 10px 12px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      font-size: 11.5px;
+      color: var(--text-muted);
+    }
+
+    .quick-info-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+
+    .quick-info-item i {
+      color: var(--accent);
+      font-size: 13px;
+    }
+
+    .quick-info-item:active {
+      transform: scale(0.97);
+    }
+
+    /* Search Bar */
+    .search-wrapper {
+      padding: 12px 16px 8px;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(18, 16, 14, 0.92);
+      backdrop-filter: blur(12px);
+    }
+
+    .search-input-box {
+      position: relative;
+      width: 100%;
+    }
+
+    .search-input-box i {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      font-size: 14px;
+      pointer-events: none;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 12px 14px 12px 40px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      color: var(--text-main);
+      font-family: inherit;
+      font-size: 14px;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .search-input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-glow);
+    }
+
+    .search-input::placeholder {
+      color: #6e645a;
+    }
+
+    /* Category Navigation Tabs */
+    .category-tabs-scroll {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding: 10px 16px 14px;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+
+    .category-tabs-scroll::-webkit-scrollbar {
+      display: none;
+    }
+
+    .category-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px;
+      white-space: nowrap;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 50px;
+      color: var(--text-muted);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    .category-pill.active {
+      background: linear-gradient(135deg, #d4a373 0%, #b87d4b 100%);
+      color: #12100e;
+      border-color: transparent;
+      box-shadow: 0 4px 14px rgba(212, 163, 115, 0.35);
+      font-weight: 700;
+    }
+
+    /* Menu Sections */
+    .menu-section {
+      padding: 16px 16px 24px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--accent-light);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-title span.icon {
+      font-size: 22px;
+    }
+
+    .section-badge {
+      font-size: 11px;
+      color: var(--accent);
+      background: var(--tag-bg);
+      padding: 3px 8px;
+      border-radius: 12px;
+      font-weight: 600;
+    }
+
+    /* Item Card */
+    .items-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .menu-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 14px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 14px;
+      transition: transform 0.2s, border-color 0.2s, background-color 0.2s;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .menu-card:active {
+      transform: scale(0.985);
+      border-color: var(--accent);
+    }
+
+    .card-info {
+      flex: 1;
+    }
+
+    .card-top-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 4px;
+      flex-wrap: wrap;
+    }
+
+    .item-name {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .item-pill {
+      font-size: 9.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      padding: 2px 7px;
+      border-radius: 6px;
+    }
+
+    .pill-special {
+      background: rgba(212, 163, 115, 0.25);
+      color: #faedcd;
+      border: 1px solid rgba(212, 163, 115, 0.4);
+    }
+
+    .pill-fresh {
+      background: rgba(46, 204, 113, 0.15);
+      color: #2ecc71;
+      border: 1px solid rgba(46, 204, 113, 0.3);
+    }
+
+    .pill-cold {
+      background: rgba(52, 152, 219, 0.15);
+      color: #3498db;
+      border: 1px solid rgba(52, 152, 219, 0.3);
+    }
+
+    .item-desc {
+      font-size: 12.5px;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+      line-height: 1.4;
+    }
+
+    .card-meta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 11px;
+      color: #8c7e70;
+    }
+
+    .card-meta span {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .card-price-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      min-width: 65px;
+    }
+
+    .item-price {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--accent);
+      white-space: nowrap;
+    }
+
+    .price-currency {
+      font-size: 12px;
+      margin-left: 2px;
+    }
+
+    /* Modal / Bottom Sheet for Item Details or Wifi */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(5px);
+      z-index: 1000;
+      display: none;
+      align-items: flex-end;
+      justify-content: center;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal-content {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 24px 24px 0 0;
+      width: 100%;
+      max-width: 480px;
+      padding: 24px;
+      box-shadow: var(--shadow-soft);
+      animation: slideUp 0.25s cubic-bezier(0.1, 0.9, 0.2, 1);
+    }
+
+    @keyframes slideUp {
+      from { transform: translateY(100%); }
+      to { transform: translateY(0); }
+    }
+
+    .modal-handle {
+      width: 44px;
+      height: 4px;
+      background: var(--border-color);
+      border-radius: 4px;
+      margin: 0 auto 18px;
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 12px;
+    }
+
+    .modal-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 20px;
+      color: var(--accent-light);
+    }
+
+    .modal-close {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 20px;
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    .modal-body {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .wifi-box {
+      background: var(--bg-secondary);
+      border: 1px dashed var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      text-align: center;
+      margin: 16px 0;
+    }
+
+    .wifi-val {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: 1px;
+      margin: 6px 0;
+      font-family: monospace;
+    }
+
+    .btn-copy {
+      background: var(--accent);
+      color: #12100e;
+      border: none;
+      padding: 8px 18px;
+      border-radius: 50px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 6px;
+    }
+
+    /* Fixed Bottom Action Bar */
+    .bottom-bar {
+      position: fixed;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 480px;
+      background: rgba(26, 22, 20, 0.95);
+      border-top: 1px solid var(--border-color);
+      padding: 12px 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      backdrop-filter: blur(12px);
+      z-index: 90;
+    }
+
+    .bottom-btn {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 11px 14px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      color: var(--text-main);
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .bottom-btn.highlight {
+      background: linear-gradient(135deg, #d4a373 0%, #b87d4b 100%);
+      color: #12100e;
+      border: none;
+      font-weight: 700;
+      margin-left: 10px;
+    }
+
+    /* Toast Notification */
+    .toast {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%) translateY(-60px);
+      background: #2ecc71;
+      color: #ffffff;
+      padding: 10px 20px;
+      border-radius: 50px;
+      font-size: 13px;
+      font-weight: 600;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      z-index: 2000;
+      transition: transform 0.3s cubic-bezier(0.1, 0.9, 0.2, 1);
+    }
+
+    .toast.show {
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* No Results Message */
+    .no-results {
+      text-align: center;
+      padding: 40px 20px;
+      color: var(--text-muted);
+      display: none;
+    }
+
+    .no-results i {
+      font-size: 36px;
+      color: var(--border-color);
+      margin-bottom: 12px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="app-container">
+    <!-- Header -->
+    <header class="hero-header">
+      <div class="cafe-badge">
+        <i class="fa-solid fa-gem"></i> Artisan Cafe & Lounge
+      </div>
+      <h1 class="cafe-title">AURA COFFEE</h1>
+      <p class="cafe-subtitle">Taze Sıkılmış Lezzetler & Nitelikli Kahve Deneyimi</p>
+    </header>
+
+    <!-- Quick Info Strip -->
+    <div class="quick-info-bar">
+      <div class="quick-info-item" onclick="openWifiModal()">
+        <i class="fa-solid fa-wifi"></i>
+        <span>Ücretsiz Wi-Fi</span>
+      </div>
+      <div class="quick-info-item" onclick="showToast('Açık: 08:30 - 23:30 (Her Gün)')">
+        <i class="fa-regular fa-clock"></i>
+        <span>08:30 - 23:30</span>
+      </div>
+      <div class="quick-info-item" onclick="showToast('Masada QR Menü Servisi')">
+        <i class="fa-solid fa-bell-concierge"></i>
+        <span>Masa Servisi</span>
+      </div>
+    </div>
+
+    <!-- Search Box -->
+    <div class="search-wrapper">
+      <div class="search-input-box">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" id="searchInput" class="search-input" placeholder="İçecek ara... (Örn: Portakal, Latte, Limonata)">
+      </div>
+    </div>
+
+    <!-- Category Filter Tabs -->
+    <div class="category-tabs-scroll">
+      <button class="category-pill active" onclick="filterCategory('all', this)">
+        <i class="fa-solid fa-border-all"></i> Tümü (24)
+      </button>
+      <button class="category-pill" onclick="filterCategory('meyve', this)">
+        <i class="fa-solid fa-lemon"></i> Meyve Suları
+      </button>
+      <button class="category-pill" onclick="filterCategory('sicak', this)">
+        <i class="fa-solid fa-mug-hot"></i> Sıcak İçecekler
+      </button>
+      <button class="category-pill" onclick="filterCategory('soguk', this)">
+        <i class="fa-solid fa-snowflake"></i> Soğuk İçecekler
+      </button>
+    </div>
+
+    <!-- No results alert -->
+    <div id="noResults" class="no-results">
+      <i class="fa-regular fa-face-frown"></i>
+      <p>Aradığınız kriterlere uygun içecek bulunamadı.</p>
+    </div>
+
+    <!-- SECTION 1: MEYVE SULARI -->
+    <section class="menu-section" data-section="meyve">
+      <div class="section-header">
+        <h2 class="section-title">
+          <span class="icon">🍊</span> Meyve Suları
+        </h2>
+        <span class="section-badge">%100 Doğal & Taze</span>
+      </div>
+      <div class="items-grid">
+
+        <div class="menu-card" data-category="meyve" onclick="openItemModal('Taze Sıkma Portakal Suyu', '110 ₺', 'Günlük taze sıkılan sulu Finike portakalları. Katkısız, şekersiz ve %100 saf vitamin deposu.', '330 ml • C Vitamini Zengini • Doğal')">
+          <div class="card-info">
+            <div class="card-top-row">
+              <span class="item-name">Taze Sıkma Portakal Suyu</span>
+              <span class="item-pill pill-fresh">Taze Sıkım</span>
+            </div>
+            <p class="item-desc">Günlük taze sıkılan sulu Finike portakalları. Katkısız ve %100 doğal.</p>
+            <div class="card-meta">
+              <span><i class="fa-solid fa-glass-water"></i> 330 ml</span>
+              <span><i class="fa-solid fa-leaf"></i> Şekersiz</span>
+            </div>
+          </div>
+          <div class="card-price-wrapper">
+            <span class="item-price">110<span class="price-currency">₺</span></span>
+          </div>
+        </div>
+
+        <div class="menu-card" data-category="meyve" onclick="openItemModal('Taze Sıkma Nar Suyu', '140 ₺', 'Mevsiminde toplanmış taze narlardan elde edilen zengin antioksidan kaynağı saf meyve suyu.', '330 ml • Yoğun Lezzet • Antioksidan')">
+          <div class="card-info">
+            <div class="card-top-row">
+              <span class="item-name">Taze Sıkma Nar Suyu</span>
+              <span class="item-pill pill-special">Popüler</span>
+            </div>
+            <p class="item-desc">Mevsiminde taze toplanmış narlardan saf ve zengin antioksidan kaynağı.</p>
+            <div class="card-meta">
+              <span><i class="fa-solid fa-glass-water"></i> 330 ml</span>
+              <span><i class="fa-solid fa-shield-heart"></i> Bağışıklık Dostu</span>
+            </div>
+          </div>
+          <div class="card-price-wrapper">
+            <span class="item-price">140<span class="price-currency">₺</span></span>
+          </div>
+        </div>
+
+        <div class="menu-card" data-category="meyve" onclick="openItemModal('Yeşil Detoks (Green Detox)', '135 ₺', 'Granny Smith yeşil elma, taze salatalık, baby ıspanak, nane yaprakları, kereviz sapı ve taze limon suyu.', '350 ml • Detoks • Arındırıcı')">
+          <div class="card-info">
+            <div class="card-top-row">
+              <span class="item-name">Yeşil Detoks (Green Detox)</span>
+              <span class="item-pill pill-fresh">Detoks</span>
+            </div>
+            <p class="item-desc">Yeşil elma, salatalık, körpe ıspanak, taze nane ve ferahlatıcı limon suyu.</p>
+            <div class="card-meta">
+              <span><i class="fa-solid fa-glass-water"></i> 350 ml</span>
+              <span><i class="fa-solid fa-spa"></i> Fit & Arındırıcı</span>
+            </div>
+          </div>
+          <div class="card-price-wrapper">
+            <span class="item-price">135<span class="price-currency">₺</span></span>
+          </div>
+        </div>
+
+        <div class="menu-card" data-category="meyve" onclick="openItemModal('Atom Enerji Mix', '150 ₺', 'Portakal suyu, taze havuç, Amasya elması, taze zencefil özütü ve organik çiçek balı.', '350 ml • Doğal Enerji • Zencefilli')">
+          <div class="card-info">
+            <div class="card-top-row">
+              <span class="item-name">Atom Enerji Mix</span>
+              <span class="item-pill pill-special">Enerji</span>
+            </div>
+            <p class="item-desc">Portakal, havuç, yeşil elma, taze rendelenmiş zencefil ve organik bal.</p>
+            <div class="card-meta">
+              <span><i class="fa-solid fa-glass-water"></i> 350 ml</span>
+              <span><i class="fa-solid fa-bolt"></i> Enerji Deposu</span>
+            </div>
+          </div>
+          <div class="card-price-wrapper">
+            <span class="item-price">150<span class="price-currency">₺</span></span>
+          </div>
+        </div>
+
+        <div class="menu-card" data-category="meyve" onclick="openItemModal('Çilek & Muz Smoothie', '145 ₺', 'Taze çilekler, yerli muz, süzme yoğurt, chia tohumu ve hafif vanilya özütü.', '400 ml • Doyurucu • Protein')">
+          <div class="card-info">
+            <div class="card-top-row">
+              <span class="item-name">Çilek & Muz Smoothie</span>
+              <span class="item-pill pill-special">Özel</span>
+            </div>
+            <p class="item-desc">Taze çilek, olgun muz, yoğurt ve chia tohumu ile kadifemsi kıvam.</p>
+            <div class="card-meta">
+              <span><i class="fa-solid fa-glass-water"></i> 400 ml</span>
+              <span><i class="fa-solid fa-heart"></i> Doyurucu</span>
+            </div>
+          </div>
+          <div class="card-price-wrapper">
+            <span class="item-price">145<span class="price-currency">₺</span></span>
+          </div>
+        </div>
+
+        <div class="menu-card" data-category="meyve" onclick="openItemModal('Orman Meyveleri Smoothie', '150 ₺', 'Yaban mersini, böğürtlen, frambuaz, taze çilek ve doğal elma suyu bazlı antioksidan harmanı.', '400 ml • Süper Gıda • Ekşi & Tatlı')">
+          <div class="card-info">
+            <div class="card-top-row">
+              <span class="item-name">Orman Meyveleri Smoothie</span>
+              <span class="item-pill pill-fresh">Orman Meyvesi</span>
+            </div>
+            <p class="item-desc">Yaban mersini, frambuaz, böğürtlen ve taze çilek ile yoğun meyveli lezzet.</p>
+            <div class="card-meta">
+              <span><i class="fa-solid fa-glass-water"></i> 400 ml</span>
+              <span><i class="fa-solid fa-fire"></i> Antioksidan</span>
+            </div>
+          </div>
+          <div class="card-price-wrapper">
+            <span class="item-price">150<span class="price-currency">₺</span></span>
+          </div>
+        </div>
+
+        <div class="menu-card" data-category="meyve" onclick="openItemModal('Tropikal Rüya (Mango & Ananas)', '155 ₺', 'Olgun mango püresi, tatlı ananas dilimleri, maracuja ve hindistan cevizi sütü.', '400 ml • Egzotik Lezzet • Vegan')">
+          <div class="card-info">
+            <div class="card-top-row">
+              <span class="item-name">Tropikal Rüya (Mango & Ananas)</span>
+              <span class="item-pill pill-special">Egzotik</span>
+            </div>
+            <p class="item-desc">Mango püre, taze ananas, çarkıfelek meyvesi ve hindistan cevizi sütü.</p>
+            <div class="card-meta">
+              <span><i class="fa-solid fa-glass-water"></i> 400 ml</span>
+              <span><i class="fa-solid fa-sun"></i> Tropikal</span>
+            </div>
+          </div>
+          <div class="card-price-wrapper">
+            <span class="item-price">155<span class="price-currency">₺</span></span>
+          </div>
+        </div>
+
+        <div class="menu-card" data-category="meyve" onclick="openItemModal('Zencefilli Havuç & Elma', '125 ₺', 'Tatlı Beypazarı havucu, Amasya kırmızı elması ve canlandırıcı taze zencefil.', '330 ml • Doğal Tat • Zencefil')">
+          <div class="card-info">
+            <div class="card-top-row">
+              <span class="item-name">Zencefilli Havuç & Elma</span>
+              <span class="item-pill pill-fresh">Taze</span>
+            </div>
+            <p class="item-desc">Taze sıkılmış havuç, Amasya elması ve canlandırıcı hafif acı zencefil dokunuşu.</p>
+            <div class="card-meta">
+              <span><i class="fa-solid fa-glass-water"></i> 330 ml</span>
+              <span><i class="fa-solid fa-eye"></i> A Vitamini</span>
+            </div>
+          </div>
+          <div class="card-price-wrapper">
+            <span class="item-price">125<span class="price-currency">₺</span></span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 2: SICAK İÇECEKLER -->
+    <section class="menu-section" data-section="sicak">
+      <div class="section-header">
+        <h2 class="section-title">
+          <span class="icon">☕</span> Sıcak İçecekler
+        </h2>
+        <span class="section-badge">Nitelikli Çekirdekler</span>
+      </div>
+      <div class="items-grid">
+
+        <div class="menu-card" data-category="sicak" onclick="openItemModal('Geleneksel Türk Kahvesi', '65 ₺', 'Taze çekilmiş %100 Arabica Brezilya Rio Minas çekirdeklerinden bakır cezvede ağır ateşte pişirilir. Çifte kavrulmuş lokum ve su ile servis edilir.', 'Sade / Orta / Şekerli Seçenekleri')">
+          <div class="card-info">
+            <div class="card-top-row">
+              <span class="item-name">Geleneksel Türk Kahvesi</span>
+              <span class="item-pill pill-special">Geleneksel</span>
+            </div>
+            <p class="item-desc">Bakır cezvede bol köpüklü pişirim. Antep fıstıklı lokum ve su ile ikram edilir.</p>
+            <div class="card-meta">
+              <span><i class="fa-solid fa-mug-hot"></i> Fincan</span>
+              <span><i class="fa-solid fa-fire-burner"></i> Közde Pişirim</span>
+            </div>
+          </div>
+          <div class="card-price-wrapper">
+            <span class="item-price">65<span class="price-currency">₺</span></span>
+          </div>
+        </div>
+
+        <div class="menu-card" data-category="sicak" onclick="openItemModal('Damla Sakızlı Türk Kahvesi', '75 ₺', 'Hakiki Çeşme damla sakızı reçinesi ile harmanlanmış benzersiz aromalı geleneksel kahve keyfi.', 'Özel Aromalı • Bakır Cezve')">
+          <div class="card-info">
+            <div class="card-top-row">
+              <span class="item-name">Damla Sakızlı Türk Kahvesi</span>
+              <span class="item-pill pill-special">Aromalı</span>
+            </div>
+            <p class="item-desc">Hakiki Çeşme damla sakızı aromalı, bol köpüklü özel fincan sunumu.</p>
+            <div class="card-meta">
+              <span><i class="fa-solid fa-mug-hot"></i> Fincan</span>
+              <span><i class="fa-solid fa-star"></i> Özel Tarif</span>
+            </div>
+          </div>
+          <div class="card-price-wrapper">
+            <span class="item-price">75<span class="price-currency">₺</span></span>
+          </div>
+        </div>
+
+        <div class="menu-card" data-category="sicak" onclick="openItemModal('Rize Özel Harman Çay', '35 ₺', 'Karadeniz dağlarından toplanmış mayıs sürgünü özel harman demleme Türk çayı.', 'İnce Belli Bardak • Taze Dem')">
+          <div class="card-info">
+            <div class="card-top-row">
+              <span class="item-name">Rize Özel Harman Çay</span>
+              <span class="item-pill pill-fresh">Taze Dem</span>
+            </div>
+            <p class="item-desc">Semaverde taze demlenmiş berrak ve aromatik Karadeniz çayı.</p>
+            <div class="card-meta">
+              <span><i class="fa-solid fa-glass-water"></i> İnce Belli</span>
+              <span><i class="fa-solid fa-check"></i> Klasik</span>
+            </div>
+          </div>
+          <div class="card-price-wrapper">
+            <span class="item-price">35<span class="price-currency">₺</span></span>
+          </div>
+        </div>
+
+        <div class="menu-card" data-category="sicak" onclick="openItemModal('Caffè Latte', '95 ₺', 'Tek shot espresso üzerine kadifemsi mikro süt köpüğü. İsteğe göre badem, yulaf veya laktozsuz süt.', '250 ml • Yumuşak İçim')">
+          <div class="card-info">
+            <div class="card-top-row">
+              <span class="item-name">Caffè Latte</span>
+              <span class="item-pill pill-special">Favori</span>
+            </div>
+            <p class="item-desc">Yoğun espresso ve ipeksi buharda ısıtılmış kadife süt uyumu.</p>
+            <div class="card-meta">
+              <span><i class="fa-solid fa-mug-hot"></i> 250 ml</span>
+              <span><i class="fa-solid fa-circle-notch"></i> Latte Art</span>
+            </div>
+          </div>
+          <div class="card-price-wrapper">
+            <span class="item-price">95<span class="price-currency">₺</span></span>
+          </div>
+        </div>
+
+        <div class="menu-card" data-category="sicak" onclick="openItemModal('Cappuccino', '95 ₺', 'Eşit oranda espresso, sıcak süt ve yoğun süt kreması. İsteğe göre tarçın serpilerek sunulur.', '200 ml • Yoğun Köpüklü')">
+          <div class="card-info">
+            <div class="card-top-row">
+              <span class="item-name">Cappuccino</span>
+              <span class="item-pill pill-special">Klasik</span>
+            </div>
+            <p class="item-desc">Dengeli İtalyan espressosu, bol süt köpüğü ve isteğe bağlı tarçın.</p>
+            <div class="card-meta">
+              <span><i class="fa-solid fa-mug-hot"></i> 200 ml</span>
+              <span><i class="fa-solid fa-cloud"></i> Yoğun Köpük</span>
+            </div>
+          </div>
+          <div class="card-price-wrapper">
+            <span class="item-price">95<span class="price-currency">₺</span></span>
+          </div>
+        </div>
+
+        <div class="menu-card" data-category="sicak" onclick="openItemModal('Caramel Macchiato', '110 ₺', 'Vanilyalı süt, çift shot espresso katmanı ve üzerine sıcak tereyağlı karamel sos.', '300 ml • Tatlı & Katmanlı')">
+          <div class="card-info">
+            <div class="card-top-row">
+              <span class="item-name">Caramel Macchiato</span>
+              <span class="item-pill pill-special">Şefin Seçimi</span>
+            </div>
+            <p class="item-desc">Vanilya aromalı sıcak süt, espresso süzülüşü ve ev yapımı karamel sos.</p>
+            <div class="card-meta">
+              <span><i class="fa-solid fa-mug-hot"></i> 300 ml</span>
+              <span><i class="fa-solid fa-cookie"></i> Karamel</span>
+            </div>
+          </div>
+          <div class="card-price-wrapper">
+            <span class="item-price">110<span class="price-currency">₺</span></span>
+          </div>
+        </div>
+
+        <div class="menu-card" data-category="sicak" onclick="openItemModal('Belçika Sıcak Çikolatası', '120 ₺', 'Gerçek Callebaut Belçika sütlü ve bitter çikolatası eritilerek tam yağlı süt ile hazırlanır. Üzerine marshmallow.', '250 ml • Gerçek Çikolata')">
+          <div class="card-info">
+            <div class="card-top-row">
+              <span class="item-name">Belçika Sıcak Çikolatası</span>
+              <span class="item-pill pill-special">Tatlı Kaçamak</span>
+            </div>
+            <p class="item-desc">Gerçek eritilmiş Belçika çikolatası, sıcak süt ve marshmallow garnisi.</p>
+            <div class="card-meta">
+              <span><i class="fa-solid fa-mug-hot"></i> 250 ml</span>
+              <span><i class="fa-solid fa-heart"></i> Yoğun Kıvam</span>
+            </div>
+          </div>
+          <div class="card-price-wrapper">
+            <span class="item-price">120<span class="price-currency">₺</span></span>
+          </div>
+        </div>
+
+        <div class="menu-card" data-category="sicak" onclick="openItemModal('Geleneksel Dağ Sahlebi', '110 ₺', 'Burdur Bucak yöresinin hakiki dağ sahlebi, tam yağlı taze süt, bol tarçın ve çekilmiş Antep fıstığı.', '250 ml • Hakiki Sahlep')">
+          <div class="card-info">
+            <div class="card-top-row">
+              <span class="item-name">Geleneksel Dağ Sahlebi</span>
+              <span class="item-pill pill-special">Kış Özel</span>
+            </div>
+            <p class="item-desc">Hakiki dağ sahlebi, sıcak süt, öğütülmüş tarçın ve Antep fıstığı ile.</p>
+            <div class="card-meta">
+              <span><i class="fa-solid fa-mug-hot"></i> 250 ml</span>
+              <span><i class="fa-solid fa-mortar-pestle"></i> Hakiki Sahlep</span>
+            </div>
+          </div>
+          <div class="card-price-wrapper">
+            <span class="item-price">110<span class="price-currency">₺</span></span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 3: SOĞUK İÇECEKLER -->
+    <section class="menu-section" data-section="soguk">
+      <div class="section-header">
+        <h2 class="section-title">
+          <span class="icon">🧊</span> Soğuk İçecekler
+        </h2>
+        <span class="section-badge">Buz Gibi Ferahlık</span>
+      </div>
+      <div class="items-grid">
+
+        <div class="menu-card" data-category="soguk" onclick="openItemModal('Ev Yapımı Naneli Limonata', '90 ₺', 'Kendi mutfağımızda taze limonların kabuklarıyla ovularak sıkılması, taze nane yaprakları ve az şekerli ferahlatıcı tarif.', '380 ml • El Yapımı • Ferah')">
+          <div class="card-info">
+            <div class="card-top-row">
+              <span class="item-name">Ev Yapımı Naneli Limonata</span>
+              <span class="item-pill pill-fresh">Ev Yapımı</span>
+            </div>
+            <p class="item-desc">Taze sıkılmış limonlar, ezilmiş nane yaprakları ve dengeli tatlılık.</p>
+            <div class="card-meta">
+              <span><i class="fa-solid fa-glass-water"></i> 380 ml</span>
+              <span><i class="fa-solid fa-snowflake"></i> Buz Gibi</span>
+            </div>
+          </div>
+          <div class="card-price-wrapper">
+            <span class="item-price">90<span class="price-currency">₺</span></span>
+          </div>
+        </div>
+
+        <div class="menu-card" data-category="soguk" onclick="openItemModal('Çilekli Ev Yapımı Limonata', '105 ₺', 'Geleneksel ev yapımı limonatamıza eklenen taze çilek püresi ve limon dilimleri.', '380 ml • Meyveli & Ekşi')">
+          <div class="card-info">
+            <div class="card-top-row">
+              <span class="item-name">Çilekli Ev Yapımı Limonata</span>
+              <span class="item-pill pill-special">Favori</span>
+            </div>
+            <p class="item-desc">Taze çilek püresi, ev yapımı limonata bazı ve taze nane yaprakları.</p>
+            <div class="card-meta">
+              <span><i class="fa-solid fa-glass-water"></i> 380 ml</span>
+              <span><i class="fa-solid fa-heart"></i> Çok Sevilen</span>
+            </div>
+          </div>
+          <div class="card-price-wrapper">
+            <span class="item-price">105<span class="price-currency">₺</span></span>
+          </div>
+        </div>
+
+        <div class="menu-card" data-category="soguk" onclick="openItemModal('Iced Latte', '105 ₺', 'Bol buz, soğuk süt ve taze çekilmiş çift shot espresso. (Karamel, Fındık veya Vanilya aroma seçeneği).', '350 ml • Buzlu Kahve')">
+          <div class="card-info">
+            <div class="card-top-row">
+              <span class="item-name">Iced Latte</span>
+              <span class="item-pill pill-cold">Soğuk Kahve</span>
+            </div>
+            <p class="item-desc">Buzlu süt ve taze espresso buluşması. Hafif ve ferahlatıcı kahve keyfi.</p>
+            <div class="card-meta">
+              <span><i class="fa-solid fa-glass-water"></i> 350 ml</span>
+              <span><i class="fa-solid fa-cube"></i> Bol Buzlu</span>
+            </div>
+          </div>
+          <div class="card-price-wrapper">
+            <span class="item-price">105<span class="price-currency">₺</span></span>
+          </div>
+        </div>
+
+        <div class="menu-card" data-category="soguk" onclick="openItemModal('Cold Brew (16 Saat Demleme)', '115 ₺', 'Etiyopya Yirgacheffe çekirdeklerinin 16 saat boyunca damla damla soğuk demlenmesiyle elde edilen asiditesi düşük, yoğun meyvemsi aroma.', '300 ml • Özel Demleme • Düşük Asidite')">
+          <div class="card-info">
+            <div class="card-top-row">
+              <span class="item-name">Cold Brew (16 Saat Demleme)</span>
+              <span class="item-pill pill-special">Artisan</span>
+            </div>
+            <p class="item-desc">16 saat boyunca damıtılarak soğuk demlenen yumuşak ve gövdeli kahve.</p>
+            <div class="card-meta">
+              <span><i class="fa-solid fa-glass-water"></i> 300 ml</span>
+              <span><i class="fa-solid fa-hourglass-half"></i> 16 Saat</span>
+            </div>
+          </div>
+          <div class="card-price-wrapper">
+            <span class="item-price">115<span class="price-currency">₺</span></span>
+          </div>
+        </div>
+
+        <div class="menu-card" data-category="soguk" onclick="openItemModal('Iced Caramel Macchiato', '120 ₺', 'Buz, vanilyalı soğuk süt, çift shot espresso ve üzerinde kalın karamel şeritleri.', '380 ml • Karamel & Espresso')">
+          <div class="card-info">
+            <div class="card-top-row">
+              <span class="item-name">Iced Caramel Macchiato</span>
+              <span class="item-pill pill-special">Popüler</span>
+            </div>
+            <p class="item-desc">Katmanlı soğuk sunum; vanilya sütü, buz, espresso ve yoğun karamel sos.</p>
+            <div class="card-meta">
+              <span><i class="fa-solid fa-glass-water"></i> 380 ml</span>
+              <span><i class="fa-solid fa-layer-group"></i> Katmanlı</span>
+            </div>
+          </div>
+          <div class="card-price-wrapper">
+            <span class="item-price">120<span class="price-currency">₺</span></span>
+          </div>
+        </div>
+
+        <div class="menu-card" data-category="soguk" onclick="openItemModal('Berry Hibiscus Refresher', '110 ₺', 'Demlenmiş ekşi hibiskus çiçeği özü, böğürtlen parçacıkları, taze misket limonu ve buz.', '400 ml • Şekersiz • Ferahlatıcı')">
+          <div class="card-info">
+            <div class="card-top-row">
+              <span class="item-name">Berry Hibiscus Refresher</span>
+              <span class="item-pill pill-fresh">Refresher</span>
+            </div>
+            <p class="item-desc">Hibiskus çayı demi, orman meyveleri taneleri, limon dilimi ve bol buz.</p>
+            <div class="card-meta">
+              <span><i class="fa-solid fa-glass-water"></i> 400 ml</span>
+              <span><i class="fa-solid fa-droplet"></i> Susuzluk Giderici</span>
+            </div>
+          </div>
+          <div class="card-price-wrapper">
+            <span class="item-price">110<span class="price-currency">₺</span></span>
+          </div>
+        </div>
+
+        <div class="menu-card" data-category="soguk" onclick="openItemModal('Şeftalili Soğuk Çay (Ice Tea)', '85 ₺', 'Siyah çay demi, taze şeftali özü ve limon ile demlenen katkısız soğuk çay.', '380 ml • Gerçek Çay Demi')">
+          <div class="card-info">
+            <div class="card-top-row">
+              <span class="item-name">Şeftalili Soğuk Çay (Ice Tea)</span>
+              <span class="item-pill pill-cold">Soğuk Çay</span>
+            </div>
+            <p class="item-desc">Gerçek Karadeniz çayı demi, doğal şeftali aroması ve nane ile servis.</p>
+            <div class="card-meta">
+              <span><i class="fa-solid fa-glass-water"></i> 380 ml</span>
+              <span><i class="fa-solid fa-leaf"></i> Doğal Demleme</span>
+            </div>
+          </div>
+          <div class="card-price-wrapper">
+            <span class="item-price">85<span class="price-currency">₺</span></span>
+          </div>
+        </div>
+
+        <div class="menu-card" data-category="soguk" onclick="openItemModal('Doğal Maden Suyu (Sade / Limonlu)', '45 ₺', 'Zengin mineralli doğal kaynak maden suyu. Buz ve limon dilimi eşliğinde.', '200 ml • Zengin Mineral')">
+          <div class="card-info">
+            <div class="card-top-row">
+              <span class="item-name">Doğal Maden Suyu (Sade / Limonlu)</span>
+              <span class="item-pill pill-fresh">Doğal Kaynak</span>
+            </div>
+            <p class="item-desc">Zengin mineralli doğal maden suyu, buz ve limon dilimi ile servis edilir.</p>
+            <div class="card-meta">
+              <span><i class="fa-solid fa-bottle-water"></i> 200 ml</span>
+              <span><i class="fa-solid fa-sparkles"></i> Mineralli</span>
+            </div>
+          </div>
+          <div class="card-price-wrapper">
+            <span class="item-price">45<span class="price-currency">₺</span></span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Bottom Actions -->
+    <div class="bottom-bar">
+      <button class="bottom-btn" onclick="openWifiModal()">
+        <i class="fa-solid fa-wifi"></i> Wi-Fi Şifresi
+      </button>
+      <button class="bottom-btn highlight" onclick="showToast('Garson masanıza yönlendirildi!')">
+        <i class="fa-solid fa-bell"></i> Garson Çağır
+      </button>
+    </div>
+  </div>
+
+  <!-- Item Detail Modal -->
+  <div id="itemModal" class="modal-overlay" onclick="closeModalOnBg(event, 'itemModal')">
+    <div class="modal-content">
+      <div class="modal-handle"></div>
+      <div class="modal-header">
+        <h3 id="modalItemTitle" class="modal-title">İçecek Adı</h3>
+        <button class="modal-close" onclick="closeModal('itemModal')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p id="modalItemDesc">Açıklama</p>
+        <div style="margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center;">
+          <span id="modalItemMeta" style="font-size: 12px; color: var(--accent);">Porsiyon Bilgisi</span>
+          <span id="modalItemPrice" style="font-size: 20px; font-weight: 700; color: var(--accent-light);">0 ₺</span>
+        </div>
+      </div>
+      <button class="btn-copy" style="width: 100%; justify-content: center; padding: 12px;" onclick="showToast('Sipariş için lütfen garsona iletiniz.'); closeModal('itemModal');">
+        <i class="fa-solid fa-thumbs-up"></i> Beğendim, Sipariş Edeceğim
+      </button>
+    </div>
+  </div>
+
+  <!-- Wi-Fi Modal -->
+  <div id="wifiModal" class="modal-overlay" onclick="closeModalOnBg(event, 'wifiModal')">
+    <div class="modal-content">
+      <div class="modal-handle"></div>
+      <div class="modal-header">
+        <h3 class="modal-title">Ücretsiz Misafir Wi-Fi</h3>
+        <button class="modal-close" onclick="closeModal('wifiModal')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>Aura Coffee misafirleri için yüksek hızlı kablosuz internet hizmeti:</p>
+        <div class="wifi-box">
+          <div style="font-size: 11px; text-transform: uppercase; color: var(--text-muted);">Ağ Adı (SSID)</div>
+          <div class="wifi-val">AuraCoffee_Guest</div>
+          <div style="font-size: 11px; text-transform: uppercase; color: var(--text-muted); margin-top: 8px;">Wi-Fi Şifresi</div>
+          <div class="wifi-val" id="wifiPass">aura2026coffee</div>
+          <button class="btn-copy" onclick="copyWifi()">
+            <i class="fa-regular fa-copy"></i> Şifreyi Kopyala
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toastNotification" class="toast">Bildirim mesajı</div>
+
+  <script>
+    // Search Functionality
+    const searchInput = document.getElementById('searchInput');
+    const cards = document.querySelectorAll('.menu-card');
+    const sections = document.querySelectorAll('.menu-section');
+    const noResults = document.getElementById('noResults');
+
+    searchInput.addEventListener('input', (e) => {
+      const query = e.target.value.toLowerCase().trim();
+      let totalVisible = 0;
+
+      cards.forEach(card => {
+        const text = card.textContent.toLowerCase();
+        if (text.includes(query)) {
+          card.style.display = 'flex';
+          totalVisible++;
+        } else {
+          card.style.display = 'none';
+        }
+      });
+
+      sections.forEach(section => {
+        const visibleInSec = section.querySelectorAll('.menu-card[style*="display: flex"]').length;
+        if (query === '') {
+          section.style.display = 'block';
+        } else {
+          section.style.display = visibleInSec > 0 ? 'block' : 'none';
+        }
+      });
+
+      noResults.style.display = totalVisible === 0 ? 'block' : 'none';
+    });
+
+    // Category Tabs Filter
+    function filterCategory(cat, btn) {
+      searchInput.value = '';
+      noResults.style.display = 'none';
+      
+      document.querySelectorAll('.category-pill').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      if (cat === 'all') {
+        sections.forEach(s => s.style.display = 'block');
+        cards.forEach(c => c.style.display = 'flex');
+      } else {
+        sections.forEach(s => {
+          if (s.dataset.section === cat) {
+            s.style.display = 'block';
+            s.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          } else {
+            s.style.display = 'none';
+          }
+        });
+        cards.forEach(c => {
+          c.style.display = (c.dataset.category === cat) ? 'flex' : 'none';
+        });
+      }
+    }
+
+    // Modal Helpers
+    function openItemModal(name, price, desc, meta) {
+      document.getElementById('modalItemTitle').innerText = name;
+      document.getElementById('modalItemPrice').innerText = price;
+      document.getElementById('modalItemDesc').innerText = desc;
+      document.getElementById('modalItemMeta').innerText = meta;
+      document.getElementById('itemModal').classList.add('active');
+    }
+
+    function openWifiModal() {
+      document.getElementById('wifiModal').classList.add('active');
+    }
+
+    function closeModal(id) {
+      document.getElementById(id).classList.remove('active');
+    }
+
+    function closeModalOnBg(e, id) {
+      if (e.target.id === id) {
+        closeModal(id);
+      }
+    }
+
+    // Copy WiFi Password
+    function copyWifi() {
+      const pass = document.getElementById('wifiPass').innerText;
+      navigator.clipboard.writeText(pass).then(() => {
+        showToast('Wi-Fi şifresi kopyalandı! 📶');
+        closeModal('wifiModal');
+      }).catch(() => {
+        showToast('Şifre: ' + pass);
+      });
+    }
+
+    // Toast
+    function showToast(msg) {
+      const toast = document.getElementById('toastNotification');
+      toast.innerText = msg;
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 2600);
+    }
+  </script>
+</body>
+</html>
